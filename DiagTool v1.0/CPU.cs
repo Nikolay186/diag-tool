@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Management;
 
 namespace DiagTool_v1._0
 {
@@ -61,7 +63,7 @@ namespace DiagTool_v1._0
             ["6"] = "Video Processor"
         };
 
-        private int cpuPosNumber { get; set; }
+        private int CpuPosNumber { get; set; }
 
         private string AddressWidth { get; set; }
         private string _architecture;
@@ -153,7 +155,18 @@ namespace DiagTool_v1._0
         private string CpuStatus { get; set; }
         private string StatusInfo { get; set; }
         private string UpgradeMethod { get; set; }
-        private string Version { get; set; }
+
+        private string version;
+        private string Version
+        {
+            get => version;
+
+            set
+            {
+                if (string.IsNullOrEmpty(value))
+                    version = "Undefined";
+            }
+        }
 
         private string isVEnabled;
         private string IsVirtualizationEnabled
@@ -180,6 +193,103 @@ namespace DiagTool_v1._0
                 vmMMExt = SupportedStatus[value];
             }
 
+        }
+
+        public List<string[][]> CollectCPUData()
+        {
+            var data = ProcessQuery("Win32_Processor");
+
+            var processors = new List<CPU>();
+            for (int i = 1; i <= data.Count; i++)
+                processors.Add(new CPU { CpuPosNumber = i });
+
+            int pos = 0;
+            try
+            {
+                foreach (ManagementObject obj in data)
+                {
+                    processors[pos].AddressWidth = obj["AddressWidth"].ToString();
+                    processors[pos].Architecture = obj["Architecture"].ToString();
+                    processors[pos].Availability = obj["Availability"].ToString();
+                    processors[pos].CoresCount = obj["NumberOfCores"].ToString();
+                    processors[pos].CpuID = obj["ProcessorId"].ToString();
+                    processors[pos].CpuStatus = obj["CpuStatus"].ToString();
+                    processors[pos].CPUType = obj["ProcessorType"].ToString();
+                    processors[pos].CurrentClockSpeed = obj["CurrentClockSpeed"].ToString();
+                    processors[pos].CurrentVoltage = obj["CurrentVoltage"].ToString();
+                    processors[pos].DataWidth = obj["DataWidth"].ToString();
+                    processors[pos].DeviceID = obj["DeviceID"].ToString();
+                    processors[pos].EnabledCoresCount = obj["NumberOfEnabledCore"].ToString();
+                    processors[pos].ExternClockSpeed = obj["ExtClock"].ToString();
+                    processors[pos].IsPowerManagementSupported = obj["PowerManagementSupported"].ToString();
+                    processors[pos].IsSecondLvlAddressTranslationSupported = obj["SecondLevelAddressTranslationExtensions"].ToString();
+                    processors[pos].IsVirtualizationEnabled = obj["VirtualizationFirmwareEnabled"].ToString();
+                    processors[pos].L2Cache = obj["L2CacheSize"].ToString();
+                    processors[pos].L3Cache = obj["L3CacheSize"].ToString();
+                    processors[pos].LoadPercent = obj["LoadPercentage"].ToString();
+                    processors[pos].Manufacturer = obj["Manufacturer"].ToString();
+                    processors[pos].MaxClockSpeed = obj["MaxClockSpeed"].ToString();
+                    processors[pos].Model = obj["Description"].ToString();
+                    processors[pos].Name = obj["Name"].ToString();
+                    processors[pos].SerialNumber = obj["SerialNumber"].ToString();
+                    processors[pos].SocketChipType = obj["SocketDesignation"].ToString();
+                    processors[pos].StatusInfo = obj["StatusInfo"].ToString();
+                    processors[pos].ThreadsCount = obj["ThreadCount"].ToString();
+                    processors[pos].UpgradeMethod = obj["UpgradeMethod"].ToString();
+                    processors[pos].Version = obj["Version"].ToString();
+                    processors[pos].VmMonitorModeExt = obj["VMMonitorModeExtensions"].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                HandleException(ex);
+            }
+            return GetCPUData(processors);
+        }
+
+        private List<string[][]> GetCPUData(List<CPU> list)
+        {
+            var dataList = new List<string[][]>();
+
+            foreach (CPU cpu in list)
+            {
+                string[][] dataGrid =
+                {
+                    new string[] {"CPU: ", string.Empty},
+                    new string[] {$"CPU #{cpu.CpuPosNumber}", string.Empty},
+                    new string[] {"Manufacturer: ", cpu.Manufacturer},
+                    new string[] {"Name: ", cpu.Name},
+                    new string[] {"Cores: ", cpu.CoresCount},
+                    new string[] {"Enabled cores: ", cpu.EnabledCoresCount},
+                    new string[] {"Threads: ", cpu.ThreadsCount},
+                    new string[] {"Max core speed (MHz): ", cpu.MaxClockSpeed},
+                    new string[] {"Current core speed (MHz): ", cpu.CurrentClockSpeed},
+                    new string[] {"Current voltage (V): ", cpu.CurrentVoltage},
+                    new string[] {"Architecture: ", cpu.Architecture},
+                    new string[] {"L2 cache (KB): ", cpu.L2Cache},
+                    new string[] {"L3 cache (KB): ", cpu.L3Cache},
+                    new string[] {"Load percentage: ", cpu.LoadPercent + "%"},
+                    new string[] {"Virtualization: ", cpu.IsVirtualizationEnabled},
+                    new string[] {"VM Monitor extensions", cpu.VmMonitorModeExt},
+                    new string[] {"Codename: ", cpu.Model},
+                    new string[] {"Data width: ", cpu.DataWidth},
+                    new string[] {"Availability: ", cpu.Availability},
+                    new string[] {"Part number: ", cpu.CpuID},
+                    new string[] {"Status: ", cpu.CpuStatus},
+                    new string[] {"Type: ", cpu.CPUType},
+                    new string[] {"ID: ", cpu.DeviceID},
+                    new string[] {"Bus speed (MHz): ", cpu.ExternClockSpeed},
+                    new string[] {"Power management: ", cpu.IsPowerManagementSupported},
+                    new string[] {"Second level address translation: ", cpu.IsSecondLvlAddressTranslationSupported},
+                    new string[] {"S\\N", cpu.SerialNumber},
+                    new string[] {"Socket chip type: ", cpu.SocketChipType},
+                    new string[] {"Status: ", cpu.StatusInfo},
+                    new string[] {"Upgrade: ", cpu.UpgradeMethod},
+                    new string[] {"Version: ", cpu.Version},
+                };
+                dataList.Add(dataGrid);
+            }
+            return dataList;
         }
     }
 }

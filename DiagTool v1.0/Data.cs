@@ -64,7 +64,6 @@ namespace DiagTool_v1._0
                         dataGridView.Rows.Add(data[0], data[1]);
                     }
                 }
-                dataGridView.Rows.RemoveAt(dataGridView.Rows.Count - 1);
             }
             catch (Exception ex)
             {

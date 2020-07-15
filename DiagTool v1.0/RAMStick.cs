@@ -124,7 +124,7 @@ namespace DiagTool_v1._0
             {
                 string[][] dataGrid =
                 {                   
-                    new string[] {$"Stick #{stick.Position}:", string.Empty},
+                    new string[] {$"Stick #{stick.Position}", string.Empty},
                     new string[] {"Manufacturer: ", stick.Manufacturer},
                     new string[] {"Capacity (GB):", stick.Capacity},
                     new string[] {"Channel: ", stick.Channel},

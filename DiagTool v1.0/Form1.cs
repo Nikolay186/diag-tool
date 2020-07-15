@@ -12,6 +12,7 @@ namespace DiagTool_v1._0
             InitializeComponent();
             ShowSystemData();
             ShowMBData();
+            ShowCPUData();
             List<DataGridView> gridViews = new List<DataGridView>()
             {
                 systemDataGridView,
@@ -45,6 +46,14 @@ namespace DiagTool_v1._0
             mbDataGridView.Rows.Add(new string[] { string.Empty, string.Empty });
             mbDataGridView.Rows.Add(new string[] { "RAM: ", string.Empty });
             Data.ShowData(mbDataGridView, dataGridList);
+            mbDataGridView.Rows.RemoveAt(mbDataGridView.Rows.Count - 1);
+        }
+
+        private void ShowCPUData()
+        {
+            CPU CPUData = new CPU();
+            List<string[][]> dataGridList = CPUData.CollectCPUData();
+            Data.ShowData(cpuDataGridView, dataGridList);
         }
 
         private void CheckDataGrid(List<DataGridView> dataGridList)
