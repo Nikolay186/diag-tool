@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>DiagTool_v1._0</RootNamespace>
     <AssemblyName>DiagTool v1.0</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <TargetFrameworkProfile />
@@ -59,7 +59,10 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RAMStick.cs" />
+    <Compile Include="SecondaryVideoAdapter.cs" />
     <Compile Include="SystemData.cs" />
+    <Compile Include="MainVideoAdapter.cs" />
+    <Compile Include="VideoAdapter.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

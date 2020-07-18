@@ -14,7 +14,6 @@ namespace DiagTool_v1._0
         private string RefreshRate { get; set; }
         private string ScanMode { get; set; }
         private string VerticalRes { get; set; }
-        private string AdapterID { get; set; }
         private string DitherType { get; set; }
         private string MaxRefreshRate { get; set; }
         private string MinRefreshRate { get; set; }
@@ -63,13 +62,12 @@ namespace DiagTool_v1._0
 
         private string[][] GetVideoData(MainVideoAdapter ad)
         {
-
             string[][] dataGrid =
             {
-                new string[] {$"Adapter #{ad.AdapterID}", string.Empty},
+                new string[] {$"Main Adapter", string.Empty},
                 new string[] {"Name: ", ad.AdapterName},
                 new string[] {"Processor model: ", ad.VideoProcessor},
-                new string[] {"Current Display Settings: ", ad.HorizontalRes + " x " + ad.VerticalRes + " " + ad.BitsPerPixel + "Bit"},
+                new string[] {"Current Display Settings: ", ad.HorizontalRes + " x " + ad.VerticalRes + " " + ad.BitsPerPixel + " Bit"},
                 new string[] {"Memory Size: ", ad.AdapterRAMSize},
                 new string[] {"DAC Type: ", ad.AdapterDACType},
                 new string[] {"Horizontal Resolution: ", ad.HorizontalRes},

@@ -11,6 +11,7 @@ namespace DiagTool_v1._0
         protected string AdapterCompatibility { get; set; }
         protected string AdapterDACType { get; set; }
         protected string AdapterRAMSize { get; set; }
+        protected string AdapterID { get; set; }
         protected string Availability { get; set; }
         protected string AdapterName { get; set; }
         protected string ErrorCode { get; set; }
