@@ -14,6 +14,7 @@ namespace DiagTool_v1._0
             ShowMBData();
             ShowCPUData();
             ShowVideoData();
+            ShowStorageData();
             List<DataGridView> gridViews = new List<DataGridView>()
             {
                 systemDataGridView,
@@ -66,6 +67,14 @@ namespace DiagTool_v1._0
             Data.ShowData(videoDataGridView, dataGridList);
             videoDataGridView.Rows.Add(string.Empty, string.Empty);
             Data.ShowData(videoDataGridView, secondList);
+        }
+
+        private void ShowStorageData()
+        {
+            DiskDrive drive = new DiskDrive();
+            var dataGridList = drive.CollectStorageData();
+            Data.ShowData(storageDataGridView, dataGridList);
+            storageDataGridView.Rows.RemoveAt(storageDataGridView.Rows.Count - 1);
         }
 
         private void CheckDataGrid(List<DataGridView> dataGridList)
