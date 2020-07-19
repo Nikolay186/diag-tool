@@ -12,7 +12,7 @@ namespace DiagTool_v1._0
         private string BytesPerSector { get; set; }
         private string[] CapabilityDescription { get; set; }
         private string ErrorCode { get; set; }
-        private string UserConfid { get; set; }
+        private string UserConfig { get; set; }
         private string DiskID { get; set; }
         private string FirmwareRev { get; set; }
         private string Index { get; set; }
@@ -28,8 +28,17 @@ namespace DiagTool_v1._0
         private string SCSITargetId { get; set; }
         private string SectorsPerTrack { get; set; }
         private string SerialNumber { get; set; }
-        private string Signature { get; set; }
-        private string Size { get; set; }
+        private string sz;
+        private string Size
+        {
+            get => sz;
+
+            set
+            {
+                long tmp = Convert.ToInt64(value);
+                sz = Convert.ToString(tmp / 1073741824);
+            }
+        }
         private string Status { get; set; }
         private string TotalCylinders { get; set; }
         private string TotalHeads { get; set; }
@@ -72,6 +81,7 @@ namespace DiagTool_v1._0
                     dd[pos].Size = obj["Size"].ToString();
                     dd[pos].Status = obj["Status"].ToString();
                     dd[pos].TotalCylinders = obj["TotalCylinders"].ToString();
+                    dd[pos].UserConfig = obj["ConfigManagerUserConfig"].ToString();
                     dd[pos].TotalHeads = obj["TotalHeads"].ToString();
                     dd[pos].TotalSectors = obj["TotalSectors"].ToString();
                     dd[pos].TotalTracks = obj["TotalTracks"].ToString();
@@ -99,6 +109,9 @@ namespace DiagTool_v1._0
                         new string[] {$"Disk #{dd.Index}", string.Empty},
                         new string[] {"Model: ", dd.Model},
                         new string[] {"Size (GB): ", dd.Size},
+                        new string[] {"Disk ID: ", dd.DiskID},
+                        new string[] {"User Config: ", dd.UserConfig},
+                        new string[] {"Bytes Per Sector: ", dd.BytesPerSector},
                         new string[] {"S\\N: ", dd.SerialNumber},
                         new string[] {"Firmware Version: ", dd.FirmwareRev},
                         new string[] {"Partitions: ", dd.PartitionsCount},
