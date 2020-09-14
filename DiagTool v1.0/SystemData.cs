@@ -11,10 +11,8 @@ namespace DiagTool_v1._0
         private string localDT;
         private string LocalDateTime
         {
-            get
-            {
-                return localDT;
-            }
+            get => localDT;
+            
             set
             {
                 localDT = ParseDate(value);
@@ -24,10 +22,8 @@ namespace DiagTool_v1._0
         private string osVersion;
         private string OSVersion
         {
-            get
-            {
-                return osVersion;
-            }
+            get => osVersion;
+            
             set
             {
                 string[] data = value.Split('|');
@@ -38,10 +34,8 @@ namespace DiagTool_v1._0
         private string osInstallDate;
         private string OSInstallDate
         {
-            get
-            {
-                return osInstallDate;
-            }
+            get => osInstallDate;
+            
             set
             {
                 osInstallDate = ParseDate(value);
@@ -51,10 +45,8 @@ namespace DiagTool_v1._0
         private string osLanguage;
         private string OSLanguage
         {
-            get
-            {
-                return osLanguage;
-            }
+            get => osLanguage;
+            
             set
             {
                 int v = Convert.ToInt32(value);

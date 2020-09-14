@@ -70,10 +70,8 @@ namespace DiagTool_v1._0
 
         private string Architecture
         {
-            get
-            {
-                return _architecture;
-            }
+            get => _architecture;
+            
             set
             {
                 _architecture = ArchitectureDictionary[value];
@@ -83,10 +81,8 @@ namespace DiagTool_v1._0
         private string _availability;
         private string Availability
         {
-            get
-            {
-                return _availability;
-            }
+            get => _availability;
+            
             set
             {
                 _availability = AvailabilityDictionary[value];
@@ -112,10 +108,8 @@ namespace DiagTool_v1._0
         private string powermgmnt;
         private string IsPowerManagementSupported
         {
-            get
-            {
-                return powermgmnt;
-            }
+            get => powermgmnt;
+            
             set
             {
                 powermgmnt = SupportedStatus[value];
@@ -127,10 +121,8 @@ namespace DiagTool_v1._0
         private string cput;
         private string CPUType
         {
-            get
-            {
-                return cput;
-            }
+            get => cput;
+            
             set
             {
                 cput = CPUTypeDictionary[value];
@@ -140,10 +132,8 @@ namespace DiagTool_v1._0
         private string secondLvlAddress;
         private string IsSecondLvlAddressTranslationSupported
         {
-            get
-            {
-                return secondLvlAddress;
-            }
+            get => secondLvlAddress;
+            
             set
             {
                 secondLvlAddress = SupportedStatus[value];
@@ -171,10 +161,8 @@ namespace DiagTool_v1._0
         private string isVEnabled;
         private string IsVirtualizationEnabled
         {
-            get
-            {
-                return isVEnabled;
-            }
+            get => isVEnabled;
+            
             set
             {
                 isVEnabled = EnabledStaus[value];
@@ -184,10 +172,8 @@ namespace DiagTool_v1._0
         private string vmMMExt;
         private string VmMonitorModeExt
         {
-            get
-            {
-                return vmMMExt;
-            }
+            get => vmMMExt;
+            
             set
             {
                 vmMMExt = SupportedStatus[value];

@@ -33,27 +33,23 @@ namespace DiagTool_v1._0
             ["14"] = "SMD",
         };
 
-        private string bT;
+        private string bType;
         private string Type
         {
-            get
-            {
-                return bT;
-            }
+            get => bType;
+            
 
             set
             {
-                bT = RAMType[value.ToString()];
+                bType = RAMType[value.ToString()];
             }
         }
         private int Position { get; set; }
         private string bCap;
         private string Capacity
         {
-            get
-            {
-                return bCap;
-            }
+            get => bCap;
+            
             set
             {
                 long tmp = Convert.ToInt64(value);
@@ -69,10 +65,8 @@ namespace DiagTool_v1._0
         private string bFF;
         private string FormFactor
         {
-            get
-            {
-                return bFF;
-            }
+            get => bFF;
+            
             set
             {
                 bFF = RAMFormFactor[value];
